@@ -12,17 +12,30 @@
 <script type="text/babel">
 
 
-    class Note extends React.Component {
-
+    var Note = React.createClass({
+        getInitialState() {
+            return {editing: false}
+        },
+        save() {
+            this.setState({editing: false})
+        },
         edit() {
-            alert("edit button clicked");
-        }
-
+            this.setState({editing: true})
+        },
         remove() {
             alert("remove button clicked");
-        }
+        },
+        renderForm() {
+            return (
+                    <div className="note">
+                        <textarea> </textarea>
+                        <button onClick={this.save}> Save</button>
+                    </div>
+            )
 
-        render() {
+        },
+
+        renderDisplay() {
 
             return (
                     <div className="note">
@@ -38,10 +51,18 @@
 
             )
 
+        },
+
+
+        render() {
+
+            return (this.state.editing) ? this.renderForm()
+                : this.renderDisplay()
+
 
         }
 
-    }
+    })
 
 
     var CheckBox = React.createClass({
@@ -72,13 +93,11 @@
     })
 
 
-    /*
-        ReactDOM.render(<Note>Building React Component </Note>,
-            document.getElementById('react-container'))
-    */
-
-    ReactDOM.render(<CheckBox/>,
+    ReactDOM.render(<Note>Building React Component </Note>,
         document.getElementById('react-container'))
+
+    /* ReactDOM.render(<CheckBox/>,
+         document.getElementById('react-container'))*/
 
 
 </script>
