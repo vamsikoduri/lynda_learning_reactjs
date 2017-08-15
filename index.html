@@ -17,6 +17,9 @@
             return {editing: false}
         },
         save() {
+            debugger;
+            var val = this.refs.newText.value
+            alert("the updated value is :" + val);
             this.setState({editing: false})
         },
         edit() {
@@ -28,7 +31,7 @@
         renderForm() {
             return (
                     <div className="note">
-                        <textarea> </textarea>
+                        <textarea ref="newText"> </textarea>
                         <button onClick={this.save}> Save</button>
                     </div>
             )
@@ -93,11 +96,50 @@
     })
 
 
-    ReactDOM.render(<Note>Building React Component </Note>,
-        document.getElementById('react-container'))
+    var Board = React.createClass({
 
-    /* ReactDOM.render(<CheckBox/>,
-         document.getElementById('react-container'))*/
+        propTypes:{
+
+            count:function(props,propNames){
+                if(typeof(props[propNames]) !== "number")
+                {
+                    return new Error("The No of Board must be a number")
+                }
+
+                if(props[propNames] >100)
+                {
+                    return new Error("Too many boards makes no sense!!")
+                }
+
+            }
+
+        },
+
+        render()
+        {
+            return (
+                <div className="board">
+
+                    {this.props.count}
+
+                </div>
+
+
+                )
+        }
+
+
+
+
+
+    })
+
+
+/*    ReactDOM.render(<Note>Building React Component </Note>,
+        document.getElementById('react-container')) */
+
+     ReactDOM.render(<Board count={101}/>,
+         document.getElementById('react-container'))
 
 
 </script>
