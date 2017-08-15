@@ -98,16 +98,14 @@
 
     var Board = React.createClass({
 
-        propTypes:{
+        propTypes: {
 
-            count:function(props,propNames){
-                if(typeof(props[propNames]) !== "number")
-                {
+            count: function (props, propNames) {
+                if (typeof(props[propNames]) !== "number") {
                     return new Error("The No of Board must be a number")
                 }
 
-                if(props[propNames] >100)
-                {
+                if (props[propNames] > 100) {
                     return new Error("Too many boards makes no sense!!")
                 }
 
@@ -115,31 +113,48 @@
 
         },
 
-        render()
-        {
+        getInitialState() {
+
+            return {
+                notes: [
+                    'call vamsi',
+                    'email vams',
+                    'eat lunch'
+                ]
+
+            }
+
+
+        },
+
+
+        render() {
             return (
-                <div className="board">
+                    <div className="board">
+                        {
+                            this.state.notes.map(
+                                (note, i) => {
 
-                    {this.props.count}
+                                    return <Note key={i}>{note}</Note>
 
-                </div>
+                                }
+                            )}
+
+                    </div>
 
 
-                )
+            )
         }
-
-
-
 
 
     })
 
 
-/*    ReactDOM.render(<Note>Building React Component </Note>,
-        document.getElementById('react-container')) */
+    /*    ReactDOM.render(<Note>Building React Component </Note>,
+            document.getElementById('react-container')) */
 
-     ReactDOM.render(<Board count={101}/>,
-         document.getElementById('react-container'))
+    ReactDOM.render(<Board count={10}/>,
+        document.getElementById('react-container'))
 
 
 </script>
